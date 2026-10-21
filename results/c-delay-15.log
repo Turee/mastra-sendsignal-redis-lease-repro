@@ -1,0 +1,25 @@
+STRATEGY=delay DELAY_MS=15 STEPS=2 STEP_MS=5 ITER=30 pubsub=bound RedisStreamsPubSub
+  8/30  branch=idle deliver(run1) newRun=true answered=true
+  12/30  branch=idle BUG lateFollowUpAfterControl=false
+  4/30  branch=idle BUG lateFollowUpAfterControl=true
+  6/30  branch=idle deliver(new) newRun=false answered=false
+first BUG event order:
+     8ms model.doStream run1 tool step
+    10ms model.doStream run1 FINAL step
+    14ms session agent_start [stream.activeRunId=c581e706]
+    14ms session message_start [stream.activeRunId=c581e706]
+    14ms session message_end [stream.activeRunId=c581e706]
+    17ms session message_start [stream.activeRunId=undefined]
+    17ms session tool_start [stream.activeRunId=undefined]
+    18ms session tool_end [stream.activeRunId=undefined]
+    18ms session usage_update [stream.activeRunId=undefined]
+    22ms session usage_update [stream.activeRunId=undefined]
+    25ms SEND follow-up (isRunning=true runId=c581e706 activeRunId=undefined) -> idle branch
+    28ms session message_end [stream.activeRunId=undefined]
+    28ms session agent_end complete [stream.activeRunId=undefined]
+    30ms accepted -> {"accepted":true,"runId":"c581e706-dcf0-41f1-bea0-1f56a5d5e988","action":"deliver"}
+  4036ms model.doStream answer "control-1"
+  4039ms session agent_start [stream.activeRunId=undefined]
+  4040ms session message_start [stream.activeRunId=undefined]
+  4040ms session message_end [stream.activeRunId=undefined]
+BUG REPRODUCED 16/30: accepted deliver to ended run 1, no new run, never answered or persisted.

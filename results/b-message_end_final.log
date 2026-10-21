@@ -1,0 +1,3 @@
+STRATEGY=event:message_end:2 DELAY_MS=0 STEPS=2 STEP_MS=5 ITER=30 pubsub=bound RedisStreamsPubSub
+  30/30  branch=idle wake(new) newRun=true answered=true
+NOT REPRODUCED 0/30

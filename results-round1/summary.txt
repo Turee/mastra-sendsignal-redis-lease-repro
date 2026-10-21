@@ -1,0 +1,41 @@
+a-agent_end exit=0
+  30/30  branch=idle wake(new) newRun=true answered=true
+b-usage_update_2 exit=1
+  7/30  branch=idle BUG
+  4/30  branch=idle deliver(new) newRun=false answered=false
+  19/30  branch=idle deliver(run1) newRun=true answered=true
+b-message_end_final exit=0
+  30/30  branch=none no-send
+b-agent_start_1 exit=0
+  23/30  branch=running deliver(run1) newRun=false answered=true
+  7/30  branch=idle deliver(run1) newRun=true answered=true
+c-delay-0 exit=2
+  28/30  branch=idle deliver(new) newRun=false answered=true
+  2/30  branch=running deliver(run1) newRun=false answered=true
+c-delay-2 exit=0
+  19/30  branch=idle deliver(new) newRun=false answered=true
+  11/30  branch=running deliver(run1) newRun=false answered=true
+c-delay-4 exit=0
+  10/30  branch=idle deliver(new) newRun=false answered=true
+  20/30  branch=running deliver(run1) newRun=false answered=true
+c-delay-6 exit=2
+  26/30  branch=idle deliver(run1) newRun=true answered=true
+  3/30  branch=idle deliver(new) newRun=false answered=true
+  1/30  branch=running deliver(run1) newRun=false answered=true
+c-delay-8 exit=2
+  28/30  branch=idle deliver(run1) newRun=true answered=true
+  1/30  branch=idle deliver(new) newRun=false answered=true
+  1/30  branch=idle BUG
+c-delay-10 exit=0
+  30/30  branch=idle deliver(run1) newRun=true answered=true
+c-delay-15 exit=1
+  2/30  branch=idle deliver(run1) newRun=true answered=true
+  23/30  branch=idle BUG
+  5/30  branch=idle deliver(new) newRun=false answered=false
+c-delay-20 exit=1
+  2/30  branch=idle BUG
+  28/30  branch=idle wake(new) newRun=true answered=true
+d-steps1-usage_update_1 exit=1
+  27/30  branch=idle deliver(run1) newRun=true answered=true
+  1/30  branch=idle BUG
+  2/30  branch=idle deliver(new) newRun=false answered=false

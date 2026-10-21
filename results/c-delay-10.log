@@ -1,0 +1,4 @@
+STRATEGY=delay DELAY_MS=10 STEPS=2 STEP_MS=5 ITER=30 pubsub=bound RedisStreamsPubSub
+  29/30  branch=idle deliver(run1) newRun=true answered=true
+  1/30  branch=idle deliver(new) newRun=false answered=true
+NOT REPRODUCED 0/30

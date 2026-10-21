@@ -1,0 +1,46 @@
+STRATEGY=delay DELAY_MS=6 STEPS=2 STEP_MS=5 ITER=30 pubsub=bound RedisStreamsPubSub
+  26/30  branch=idle deliver(run1) newRun=true answered=true
+  1/30  branch=running deliver(run1) newRun=false answered=true
+  1/30  branch=idle deliver(new) newRun=false answered=true
+  1/30  branch=idle deliver(new) newRun=true answered=true
+  1/30  branch=idle BUG lateFollowUpAfterControl=false
+sample event order (stale-running branch):
+    12ms model.doStream run1 tool step
+    15ms model.doStream run1 FINAL step
+    18ms session agent_start [stream.activeRunId=5b0a3aac]
+    19ms session message_start [stream.activeRunId=5b0a3aac]
+    19ms session message_end [stream.activeRunId=5b0a3aac]
+    20ms SEND follow-up (isRunning=true runId=5b0a3aac activeRunId=5b0a3aac) -> stale-running branch
+    23ms model.doStream answer "<user delivery="while-active">follow-up-4</user>"
+    25ms session message_start [stream.activeRunId=undefined]
+    25ms session tool_start [stream.activeRunId=undefined]
+    25ms session tool_end [stream.activeRunId=undefined]
+    26ms session usage_update [stream.activeRunId=undefined]
+    30ms session message_end [stream.activeRunId=undefined]
+    30ms session message_start [stream.activeRunId=undefined]
+    30ms session message_end [stream.activeRunId=undefined]
+    30ms session usage_update [stream.activeRunId=undefined]
+    31ms session message_start [stream.activeRunId=undefined]
+    33ms session usage_update [stream.activeRunId=undefined]
+    35ms session message_end [stream.activeRunId=undefined]
+    35ms session agent_end complete [stream.activeRunId=undefined]
+    36ms accepted -> {"accepted":true,"runId":"5b0a3aac-4eb2-4d2d-ac29-7f2d01cf92fd","action":"deliver"}
+  4043ms model.doStream answer "control-4"
+first BUG event order:
+    24ms model.doStream run1 tool step
+    30ms model.doStream run1 FINAL step
+    37ms session agent_start [stream.activeRunId=undefined]
+    38ms session message_start [stream.activeRunId=undefined]
+    38ms session message_end [stream.activeRunId=undefined]
+    38ms SEND follow-up (isRunning=true runId=1779ca3a activeRunId=undefined) -> idle branch
+    44ms session message_start [stream.activeRunId=10be2933]
+    44ms session tool_start [stream.activeRunId=10be2933]
+    49ms session tool_end [stream.activeRunId=undefined]
+    49ms session usage_update [stream.activeRunId=undefined]
+    54ms session usage_update [stream.activeRunId=undefined]
+    55ms session message_end [stream.activeRunId=undefined]
+    55ms session agent_end complete [stream.activeRunId=undefined]
+    56ms accepted -> {"accepted":true,"runId":"1779ca3a-a4f2-4851-a638-5372fe259981","action":"deliver"}
+  4075ms model.doStream answer "control-27"
+  4083ms session agent_start [stream.activeRunId=undefined]
+BUG REPRODUCED 1/30: accepted deliver to ended run 1, no new run, never answered or persisted.

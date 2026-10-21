@@ -1,0 +1,30 @@
+STRATEGY=delay DELAY_MS=4 STEPS=2 STEP_MS=5 ITER=30 pubsub=bound EventEmitterPubSub
+  30/30  branch=running deliver(run1) newRun=false answered=true
+sample event order (stale-running branch):
+    28ms session agent_start [stream.activeRunId=7320c74c]
+    30ms session message_start [stream.activeRunId=7320c74c]
+    30ms session message_end [stream.activeRunId=7320c74c]
+    38ms model.doStream run1 tool step
+    95ms session message_start [stream.activeRunId=7320c74c]
+    95ms session tool_start [stream.activeRunId=7320c74c]
+   103ms session tool_end [stream.activeRunId=7320c74c]
+   105ms session usage_update [stream.activeRunId=7320c74c]
+   106ms model.doStream run1 FINAL step
+   110ms SEND follow-up (isRunning=true runId=7320c74c activeRunId=7320c74c) -> stale-running branch
+   114ms session message_end [stream.activeRunId=7320c74c]
+   114ms session message_start [stream.activeRunId=7320c74c]
+   114ms session message_end [stream.activeRunId=7320c74c]
+   114ms session usage_update [stream.activeRunId=7320c74c]
+   115ms model.doStream answer "<user delivery="while-active">follow-up-0</user>"
+   116ms session message_start [stream.activeRunId=7320c74c]
+   117ms session usage_update [stream.activeRunId=7320c74c]
+   134ms session message_end [stream.activeRunId=undefined]
+   134ms session agent_end complete [stream.activeRunId=undefined]
+   135ms accepted -> {"accepted":true,"runId":"7320c74c-a27d-47a7-b4d6-e664911e533f","action":"deliver"}
+  4150ms session agent_start [stream.activeRunId=21dda8ab]
+  4151ms session message_start [stream.activeRunId=21dda8ab]
+  4151ms session message_end [stream.activeRunId=21dda8ab]
+  4151ms model.doStream answer "control-0"
+  4152ms session message_start [stream.activeRunId=21dda8ab]
+  4153ms session usage_update [stream.activeRunId=21dda8ab]
+NOT REPRODUCED 0/30

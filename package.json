@@ -1,0 +1,13 @@
+{
+  "name": "mastra-sendsignal-stale-run-repro-redis",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@mastra/core": "1.78.0",
+    "@mastra/memory": "1.38.0",
+    "@mastra/redis-streams": "0.6.3",
+    "redis": "5.12.1",
+    "tsx": "4.23.15",
+    "zod": "4.6.7"
+  }
+}

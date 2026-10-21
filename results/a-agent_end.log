@@ -1,0 +1,4 @@
+STRATEGY=agent_end DELAY_MS=0 STEPS=2 STEP_MS=5 ITER=30 pubsub=bound RedisStreamsPubSub
+  26/30  branch=idle wake(new) newRun=true answered=true
+  4/30  branch=idle deliver(new) newRun=false answered=false
+NOT REPRODUCED 0/30

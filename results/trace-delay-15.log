@@ -1,0 +1,38 @@
+STRATEGY=delay DELAY_MS=15 STEPS=2 STEP_MS=5 ITER=10 pubsub=bound RedisStreamsPubSub
+  5/10  branch=idle BUG lateFollowUpAfterControl=false
+  5/10  branch=idle deliver(run1) newRun=true answered=true
+first BUG event order:
+    26ms   runtime.sendSignal "first-0" ifIdle.streamOptions=true getActiveThreadRunId=undefine hasThreadRun=-
+    57ms model.doStream run1 tool step
+   122ms model.doStream run1 FINAL step
+   126ms   runtime.sendSignal "first-0" -> wake fe466108
+   130ms   redis run-registered run=fe466108
+   131ms session agent_start [stream.activeRunId=undefined]
+   132ms session message_start [stream.activeRunId=undefined]
+   132ms session message_end [stream.activeRunId=undefined]
+   132ms   redis stream-part:start run=fe466108
+   133ms session message_start [stream.activeRunId=undefined]
+   133ms session tool_start [stream.activeRunId=undefined]
+   135ms session tool_end [stream.activeRunId=undefined]
+   135ms session usage_update [stream.activeRunId=undefined]
+   136ms   redis stream-part:step-finish run=fe466108
+   137ms SEND follow-up (isRunning=true runId=fe466108 activeRunId=undefined) -> idle branch
+   138ms   runtime.sendSignal "follow-up-0" ifIdle.streamOptions=true getActiveThreadRunId=undefine hasThreadRun=-
+   145ms   runtime.sendSignal "follow-up-0" -> deliver fe466108
+   145ms session usage_update [stream.activeRunId=undefined]
+   146ms   redis signal-enqueued run=fe466108 signal="follow-up-0"
+   146ms   redis stream-part:step-finish run=fe466108
+   147ms session message_end [stream.activeRunId=undefined]
+   147ms session agent_end complete [stream.activeRunId=undefined]
+   147ms   redis stream-part:finish run=fe466108
+   147ms accepted -> {"accepted":true,"runId":"fe466108-b2fc-4b21-b055-9985dd3541b3","action":"deliver"}
+   147ms   redis run-completed run=fe466108
+  4152ms   runtime.sendSignal "control-0" ifIdle.streamOptions=true getActiveThreadRunId=undefine hasThreadRun=-
+  4168ms model.doStream answer "control-0"
+  4173ms   runtime.sendSignal "control-0" -> wake dcd78ca8
+  4175ms   redis run-registered run=dcd78ca8
+  4175ms session agent_start [stream.activeRunId=undefined]
+  4175ms   redis stream-part:start run=dcd78ca8
+  4176ms session message_start [stream.activeRunId=undefined]
+  4176ms session message_end [stream.activeRunId=undefined]
+BUG REPRODUCED 5/10: accepted deliver to ended run 1, no new run, never answered or persisted.

@@ -1,0 +1,29 @@
+STRATEGY=delay DELAY_MS=2 STEPS=2 STEP_MS=5 ITER=30 pubsub=bound RedisStreamsPubSub
+  28/30  branch=idle deliver(new) newRun=false answered=true
+  2/30  branch=running deliver(run1) newRun=false answered=true
+sample event order (stale-running branch):
+     7ms model.doStream run1 tool step
+     8ms model.doStream run1 FINAL step
+     9ms session agent_start [stream.activeRunId=2f435b89]
+    10ms SEND follow-up (isRunning=true runId=2f435b89 activeRunId=2f435b89) -> stale-running branch
+    10ms session message_start [stream.activeRunId=2f435b89]
+    10ms session message_end [stream.activeRunId=2f435b89]
+    11ms session message_start [stream.activeRunId=2f435b89]
+    11ms session tool_start [stream.activeRunId=2f435b89]
+    11ms session tool_end [stream.activeRunId=2f435b89]
+    12ms session usage_update [stream.activeRunId=2f435b89]
+    14ms model.doStream answer "<user delivery="while-active">follow-up-6</user>"
+    18ms session message_end [stream.activeRunId=undefined]
+    18ms session message_start [stream.activeRunId=undefined]
+    18ms session message_end [stream.activeRunId=undefined]
+    18ms session usage_update [stream.activeRunId=undefined]
+    19ms session message_start [stream.activeRunId=undefined]
+    21ms session usage_update [stream.activeRunId=undefined]
+    25ms session message_end [stream.activeRunId=undefined]
+    25ms session agent_end complete [stream.activeRunId=undefined]
+    26ms accepted -> {"accepted":true,"runId":"2f435b89-b419-4c73-86eb-83dbee1b2712","action":"deliver"}
+  4033ms model.doStream answer "control-6"
+  4036ms session agent_start [stream.activeRunId=undefined]
+  4038ms session message_start [stream.activeRunId=undefined]
+  4038ms session message_end [stream.activeRunId=undefined]
+NOT REPRODUCED 0/30

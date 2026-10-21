@@ -1,0 +1,54 @@
+a-agent_end exit=0
+  26/30  branch=idle wake(new) newRun=true answered=true
+  4/30  branch=idle deliver(new) newRun=false answered=false
+b-usage_update_2 exit=1
+  22/30  branch=idle deliver(run1) newRun=true answered=true
+  6/30  branch=idle BUG lateFollowUpAfterControl=false
+  2/30  branch=idle deliver(new) newRun=false answered=false
+b-message_end_final exit=0
+  30/30  branch=idle wake(new) newRun=true answered=true
+b-agent_start_1 exit=0
+  27/30  branch=running deliver(run1) newRun=false answered=true
+  3/30  branch=idle deliver(run1) newRun=true answered=true
+c-delay-0 exit=0
+  30/30  branch=idle deliver(new) newRun=false answered=true
+c-delay-2 exit=0
+  28/30  branch=idle deliver(new) newRun=false answered=true
+  2/30  branch=running deliver(run1) newRun=false answered=true
+c-delay-4 exit=0
+  20/30  branch=running deliver(run1) newRun=false answered=true
+  10/30  branch=idle deliver(new) newRun=false answered=true
+c-delay-6 exit=1
+  26/30  branch=idle deliver(run1) newRun=true answered=true
+  1/30  branch=running deliver(run1) newRun=false answered=true
+  1/30  branch=idle deliver(new) newRun=false answered=true
+  1/30  branch=idle deliver(new) newRun=true answered=true
+  1/30  branch=idle BUG lateFollowUpAfterControl=false
+c-delay-8 exit=0
+  30/30  branch=idle deliver(run1) newRun=true answered=true
+c-delay-10 exit=0
+  29/30  branch=idle deliver(run1) newRun=true answered=true
+  1/30  branch=idle deliver(new) newRun=false answered=true
+c-delay-12 exit=1
+  28/30  branch=idle deliver(run1) newRun=true answered=true
+  2/30  branch=idle BUG lateFollowUpAfterControl=false
+c-delay-15 exit=1
+  8/30  branch=idle deliver(run1) newRun=true answered=true
+  12/30  branch=idle BUG lateFollowUpAfterControl=false
+  4/30  branch=idle BUG lateFollowUpAfterControl=true
+  6/30  branch=idle deliver(new) newRun=false answered=false
+c-delay-18 exit=1
+  9/30  branch=idle BUG lateFollowUpAfterControl=false
+  10/30  branch=idle deliver(new) newRun=false answered=false
+  11/30  branch=idle wake(new) newRun=true answered=true
+c-delay-20 exit=1
+  6/30  branch=idle deliver(new) newRun=false answered=false
+  23/30  branch=idle wake(new) newRun=true answered=true
+  1/30  branch=idle BUG lateFollowUpAfterControl=false
+c-delay-25 exit=0
+  1/30  branch=idle deliver(new) newRun=false answered=false
+  29/30  branch=idle wake(new) newRun=true answered=true
+d-steps1-usage_update_1 exit=1
+  5/30  branch=idle BUG lateFollowUpAfterControl=false
+  24/30  branch=idle deliver(run1) newRun=true answered=true
+  1/30  branch=idle BUG lateFollowUpAfterControl=true

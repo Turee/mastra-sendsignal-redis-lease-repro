@@ -1,0 +1,3 @@
+STRATEGY=event:message_end:3 DELAY_MS=0 STEPS=2 STEP_MS=5 ITER=30 pubsub=bound RedisStreamsPubSub
+  30/30  branch=none no-send
+NOT REPRODUCED 0/30

@@ -1,0 +1,4 @@
+STRATEGY=delay DELAY_MS=18 STEPS=2 STEP_MS=5 ITER=30 pubsub=bound EventEmitterPubSub
+  8/30  branch=idle deliver(run1) newRun=true answered=true
+  22/30  branch=idle wake(new) newRun=true answered=true
+NOT REPRODUCED 0/30

@@ -1,0 +1,22 @@
+STRATEGY=event:usage_update:2 DELAY_MS=0 STEPS=2 STEP_MS=5 ITER=30 pubsub=bound RedisStreamsPubSub
+  22/30  branch=idle deliver(run1) newRun=true answered=true
+  6/30  branch=idle BUG lateFollowUpAfterControl=false
+  2/30  branch=idle deliver(new) newRun=false answered=false
+first BUG event order:
+    30ms model.doStream run1 tool step
+    34ms model.doStream run1 FINAL step
+    38ms session agent_start [stream.activeRunId=f0827b68]
+    41ms session message_start [stream.activeRunId=undefined]
+    41ms session message_end [stream.activeRunId=undefined]
+    43ms session message_start [stream.activeRunId=undefined]
+    43ms session tool_start [stream.activeRunId=undefined]
+    43ms session tool_end [stream.activeRunId=undefined]
+    44ms session usage_update [stream.activeRunId=undefined]
+    49ms session usage_update [stream.activeRunId=undefined]
+    49ms SEND follow-up (isRunning=true runId=f0827b68 activeRunId=undefined) -> idle branch
+    52ms session message_end [stream.activeRunId=undefined]
+    52ms session agent_end complete [stream.activeRunId=undefined]
+    53ms accepted -> {"accepted":true,"runId":"f0827b68-bc9e-4218-80db-031410336181","action":"deliver"}
+  4071ms model.doStream answer "control-2"
+  4081ms session agent_start [stream.activeRunId=undefined]
+BUG REPRODUCED 6/30: accepted deliver to ended run 1, no new run, never answered or persisted.

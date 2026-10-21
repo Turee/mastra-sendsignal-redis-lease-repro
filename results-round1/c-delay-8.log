@@ -1,0 +1,22 @@
+STRATEGY=delay DELAY_MS=8 STEPS=2 STEP_MS=5 ITER=30 pubsub=bound RedisStreamsPubSub
+  28/30  branch=idle deliver(run1) newRun=true answered=true
+  1/30  branch=idle deliver(new) newRun=false answered=true
+  1/30  branch=idle BUG
+first BUG event order:
+    18ms model.doStream run1 tool step
+    23ms model.doStream run1 FINAL step
+    27ms session agent_start [stream.activeRunId=50d847fa]
+    32ms session message_start [stream.activeRunId=undefined]
+    32ms session message_end [stream.activeRunId=undefined]
+    32ms SEND follow-up (isRunning=true runId=50d847fa activeRunId=undefined) -> idle branch
+    34ms session message_start [stream.activeRunId=a9e0cea9]
+    34ms session tool_start [stream.activeRunId=a9e0cea9]
+    34ms session tool_end [stream.activeRunId=a9e0cea9]
+    43ms session usage_update [stream.activeRunId=undefined]
+    50ms session usage_update [stream.activeRunId=undefined]
+    50ms session message_end [stream.activeRunId=undefined]
+    50ms session agent_end complete [stream.activeRunId=undefined]
+    52ms accepted -> {"accepted":true,"runId":"50d847fa-6ebf-4817-9a54-23eb694ad56e","action":"deliver"}
+  3068ms model.doStream answer "control-19"
+  3079ms session agent_start [stream.activeRunId=undefined]
+CONTROL FAILED in 1/30 iterations
